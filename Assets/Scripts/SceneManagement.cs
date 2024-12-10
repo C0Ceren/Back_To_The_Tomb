@@ -83,6 +83,12 @@ public class SceneManagement : MonoBehaviour
     }
 
 
+    public void Degisiklik()
+    {
+        //Bir olayý yok sadece deðiþiklik yapmak istedim.
+    }
+
+
     /* Singleton Nedir?
      
        Singleton, bir sýnýfýn yalnýzca bir örneðinin (instance) oluþturulmasýný ve bu örneðe global 
