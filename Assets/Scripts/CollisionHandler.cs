@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    //Çarpışma sonucu gerçekleşen yeniden doğma, bir sonraki levele geçme, ses oynatma ve efekt işlemleri bu classta gerçekleşir.
+    //Ã‡arpÄ±ÅŸma sonucu gerÃ§ekleÅŸen yeniden doÄŸma, bir sonraki levele geÃ§me, ses oynatma ve efekt iÅŸlemleri bu classta gerÃ§ekleÅŸir.
 
     [SerializeField] AudioClip Scream;
     [SerializeField] AudioClip EvilLaugh;
-    [SerializeField] float delay = 3f; //Gecikme süresinin belirlenmesi
+    [SerializeField] float delay = 3f; //Gecikme sÃ¼resinin belirlenmesi
     [SerializeField] ParticleSystem StartingParticles;
     [SerializeField] ParticleSystem CollisionParticles;
 
@@ -19,9 +19,9 @@ public class CollisionHandler : MonoBehaviour
     bool isCollidable = true;
     void Start()
     {
-
+        Debug.Log("Mustafadan Merhabalar");
         audioSource = GetComponent<AudioSource>();
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex; //bulunulan sahnenin indeksinin bulunması
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex; //bulunulan sahnenin indeksinin bulunmasÄ±
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class CollisionHandler : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (isControllable && isCollidable) //Bu if koşulunu ses efektlerinin iki kez çalışmaması ve debugkeyleri kullanabilmek için oluşturduk.
+        if (isControllable && isCollidable) //Bu if koÅŸulunu ses efektlerinin iki kez Ã§alÄ±ÅŸmamasÄ± ve debugkeyleri kullanabilmek iÃ§in oluÅŸturduk.
         {
 
             switch (other.gameObject.tag)
@@ -53,10 +53,10 @@ public class CollisionHandler : MonoBehaviour
                     Debug.Log("You need to finish this level.");
                     break;
 
-                default: //Burada yeniden doğma işlemleri gerçekleşir
+                default: //Burada yeniden doÄŸma iÅŸlemleri gerÃ§ekleÅŸir
 
                     GetComponent<Thrust>().enabled = false;
-                    GetComponent<Rotation>().enabled = false; //Nesnenin hareket kontrollerini kapatıyoruz.
+                    GetComponent<Rotation>().enabled = false; //Nesnenin hareket kontrollerini kapatÄ±yoruz.
 
                     Invoke("reloadTheScene", delay);
                     PlayTheAudio(Scream);
@@ -69,9 +69,9 @@ public class CollisionHandler : MonoBehaviour
 
 
 
-    private void PlayTheAudio(AudioClip clip) //Parametre olarak verilen ses klibini çalıştırır.
+    private void PlayTheAudio(AudioClip clip) //Parametre olarak verilen ses klibini Ã§alÄ±ÅŸtÄ±rÄ±r.
     {
-        isControllable = false; //Fonksiyon çalıştığında iscontrollable değeri false olacağı için if koşulunu karşılamaz ve kod bloğu çalışmaz.
+        isControllable = false; //Fonksiyon Ã§alÄ±ÅŸtÄ±ÄŸÄ±nda iscontrollable deÄŸeri false olacaÄŸÄ± iÃ§in if koÅŸulunu karÅŸÄ±lamaz ve kod bloÄŸu Ã§alÄ±ÅŸmaz.
 
         audioSource.Stop(); 
         audioSource.PlayOneShot(clip);
@@ -80,7 +80,7 @@ public class CollisionHandler : MonoBehaviour
 
 
 
-    private void reloadTheScene() //Şu anki sahneyi tekrar yükler.
+    private void reloadTheScene() //Åu anki sahneyi tekrar yÃ¼kler.
     {
         SceneManager.LoadScene(currentSceneIndex);
     }
@@ -90,7 +90,7 @@ public class CollisionHandler : MonoBehaviour
 
     private void LoadTheNextScene()
     {
-        if (currentSceneIndex + 1 == SceneManager.sceneCountInBuildSettings) //Bir sonraki sahnenin indeksi oyundaki sahne sayısına eşitse, yani bir sonraki sahne yoksa oyunun 1. sevyesine dön.
+        if (currentSceneIndex + 1 == SceneManager.sceneCountInBuildSettings) //Bir sonraki sahnenin indeksi oyundaki sahne sayÄ±sÄ±na eÅŸitse, yani bir sonraki sahne yoksa oyunun 1. sevyesine dÃ¶n.
         {
             SceneManager.LoadScene(2);
         }
@@ -101,27 +101,27 @@ public class CollisionHandler : MonoBehaviour
     }
 
 
-    private void playThePartcileSystem(ParticleSystem particles) //Parametr olarak aldığı particle systemı çalıştırır.
+    private void playThePartcileSystem(ParticleSystem particles) //Parametr olarak aldÄ±ÄŸÄ± particle systemÄ± Ã§alÄ±ÅŸtÄ±rÄ±r.
     {
-        if (!particles.isPlaying) //Aynı efekti iki kez oynatmaz
+        if (!particles.isPlaying) //AynÄ± efekti iki kez oynatmaz
         {
             particles.Play();
         }
     }
 
-    void RespondToDebugKey() //Buraya oyun geliştirme sırasında kullanmak için bazı toollar ekliyoruz.
+    void RespondToDebugKey() //Buraya oyun geliÅŸtirme sÄ±rasÄ±nda kullanmak iÃ§in bazÄ± toollar ekliyoruz.
     {
 
 
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {
-            LoadTheNextScene();  //L tuşuna basıldığında direkt bir sonraki levele atlar.
+            LoadTheNextScene();  //L tuÅŸuna basÄ±ldÄ±ÄŸÄ±nda direkt bir sonraki levele atlar.
 
         }
 
         else if (Keyboard.current.cKey.wasPressedThisFrame)
         {
-            isCollidable = !isCollidable; //c tuşuna basıldığında collision özelliğini kapatır.
+            isCollidable = !isCollidable; //c tuÅŸuna basÄ±ldÄ±ÄŸÄ±nda collision Ã¶zelliÄŸini kapatÄ±r.
         }
     }
 }
